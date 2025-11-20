@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Web Development Quiz</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #17a2b8;
+            color: white;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .options button:hover {
+            background: #138496;
+        }
+        #result {
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-bottom: 20px;
+        }
+        #submit-btn {
+            display: none;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        #submit-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Web Development Quiz</h2>
+        <div id="timer">Time Remaining: 05:00</div>
+        <p class="question" id="question"></p>
+        <div class="options" id="options"></div>
+        <p id="result"></p>
+        <button id="submit-btn">Submit</button>
+    </div>
+    
+    <script>
+        const quizData = [
+            { question: "What is the purpose of the 'use strict' directive in JavaScript?", options: ["To enable strict mode", "To define variables", "To declare functions", "To import modules"], answer: "To enable strict mode" },
+            { question: "Which HTTP status code indicates a successful GET request?", options: ["200", "404", "500", "302"], answer: "200" },
+            { question: "What does CSS Grid's 'fr' unit represent?", options: ["Fraction of available space", "Fixed ratio", "Full width", "Font-relative size"], answer: "Fraction of available space" },
+            { question: "Which JavaScript feature allows functions to remember their lexical scope?", options: ["Closure", "Promise", "Callback", "Prototype"], answer: "Closure" },
+            { question: "What is the default position property value in CSS?", options: ["Static", "Relative", "Absolute", "Fixed"], answer: "Static" },
+            { question: "Which HTML element is used for progressive enhancement of media content?", options: ["<picture>", "<video>", "<audio>", "<iframe>"], answer: "<picture>" },
+            { question: "Which method is used to send an asynchronous request in JavaScript?", options: ["fetch()", "send()", "request()", "ajax()"], answer: "fetch()" },
+            { question: "What is the role of the Virtual DOM in React?", options: ["To improve performance", "To store global state", "To compile JSX", "To manage CSS"], answer: "To improve performance" },
+            { question: "What is the difference between localStorage and sessionStorage?", options: ["localStorage persists longer", "sessionStorage allows more storage", "localStorage is faster", "sessionStorage is encrypted"], answer: "localStorage persists longer" },
+            { question: "Which meta tag improves SEO by providing a page description?", options: ["description", "keywords", "viewport", "author"], answer: "description" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 300;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endQuiz("Time's up! Your score: ");
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById("timer").innerText = `Time Remaining: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }
+
+        function endQuiz(message) {
+            clearInterval(timerInterval);
+            document.getElementById("result").innerText = `${message}${score}/${quizData.length}`;
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("question").innerText = "";
+            document.getElementById("submit-btn").style.display = "block";
+        }
+
+        document.getElementById("submit-btn").addEventListener("click", function () {
+            document.getElementById("result").innerText = "You Response Successfully. Redirecting to login page...";
+            setTimeout(() => { window.location.href = "login.html"; }, 3000);
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey || e.metaKey) e.preventDefault();
+        });
+        document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+        document.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === "hidden") {
+                endQuiz("Session expired! You switched tabs or minimized the window. Your score: ");
+            }
+        });
+
+        function loadQuestion() {
+            if (currentQuestion < quizData.length) {
+                document.getElementById("question").innerText = quizData[currentQuestion].question;
+                const optionsDiv = document.getElementById("options");
+                optionsDiv.innerHTML = "";
+                quizData[currentQuestion].options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(option);
+                    optionsDiv.appendChild(button);
+                });
+            } else {
+                endQuiz("Quiz Over! Your score: ");
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === quizData[currentQuestion].answer) score++;
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        loadQuestion();
+        startTimer();
+    </script>
+</body>
+</html>

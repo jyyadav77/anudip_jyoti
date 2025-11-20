@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Shorts - Quick Learning</title>
+    <style>
+         
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #00c3ff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 8px rgba(0, 195, 255, 0.5);
+}
+
+.course-module {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 25px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-module:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.course-module h3 {
+    font-size: 24px;
+    color: #f39c12;
+    margin-bottom: 12px;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.video-container iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    border-radius: 10px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.video-container iframe:hover {
+    transform: scale(1.05);
+}
+
+.theory {
+    margin-top: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    margin-top: 20px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background: #cc0000;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .video-container iframe {
+        max-width: 100%;
+        height: 200px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Course Shorts - Quick Learning</h2>
+
+        <!-- Course: Web Development -->
+        <div class="course-module">
+            <h3>Web Development</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video1" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video2" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Web development involves building websites and applications using technologies like HTML, CSS, and JavaScript. Advanced frameworks like React and Node.js enhance functionality.</p>
+            </div>
+        </div>
+
+        <!-- Course: Data Science -->
+        <div class="course-module">
+            <h3>Data Science</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video3" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video4" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video5" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Data Science combines statistics, AI, and programming to analyze complex data. It uses tools like Python, Pandas, and Machine Learning to derive insights.</p>
+            </div>
+        </div>
+
+        <!-- Course: Graphic Design -->
+        <div class="course-module">
+            <h3>Graphic Design</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video6" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video7" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Graphic Design focuses on visual communication using tools like Photoshop, Illustrator, and Figma. It involves typography, color theory, and digital composition.</p>
+            </div>
+        </div>
+
+        <!-- Course: Artificial Intelligence -->
+        <div class="course-module">
+            <h3>Artificial Intelligence</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video8" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video9" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Artificial Intelligence (AI) enables machines to learn and make decisions. Deep Learning, Neural Networks, and Natural Language Processing (NLP) are key AI concepts.</p>
+            </div>
+        </div>
+
+        <!-- Course: Cyber Security -->
+        <div class="course-module">
+            <h3>Cyber Security</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video10" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video11" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Cyber Security protects systems from attacks using encryption, ethical hacking, and firewalls. Experts prevent data breaches and cyber threats.</p>
+            </div>
+        </div>
+
+        <!-- Course: Business Management -->
+        <div class="course-module">
+            <h3>Business Management</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/video12" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/video13" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="theory">
+                <p>Business Management involves planning, leadership, and decision-making. It includes financial analysis, marketing strategies, and human resource management.</p>
+            </div>
+        </div>
+
+        <!-- Back to Course Page -->
+        <a href="instit.html" class="btn">Back to Courses</a>
+    </div>
+
+    
+</body>
+</html>

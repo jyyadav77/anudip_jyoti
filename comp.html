@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Section</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            margin-top: 50px;
+            letter-spacing: 1px;
+        }
+
+        /* Company List Styles */
+        .company-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+            gap: 40px;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .company-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .company-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .company-item h3 {
+            font-size: 22px;
+            margin-top: 15px;
+            color: #2c3e50;
+        }
+
+        .company-item p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .company-item h4 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        .company-item ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .company-item ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .company-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .apply-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header {
+                font-size: 26px;
+                padding: 20px;
+            }
+
+            .company-item img {
+                height: 180px;
+            }
+
+            footer {
+                font-size: 14px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 22px;
+                padding: 15px;
+            }
+
+            .company-item {
+                padding: 20px;
+            }
+
+            .company-item img {
+                height: 160px;
+            }
+
+            footer {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>IT Companies</header>
+    <section id="company">
+        <div class="company-list">
+            <div class="company-item">
+                <img src="image/techcrop.png" alt="TechCorp">
+                <h3>TechCorp</h3>
+                <p>Leading technology solutions provider.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>Proficiency in Python and Java</li>
+                    <li>Experience with cloud computing</li>
+                    <li>Strong troubleshooting skills</li>
+                </ul>
+                <a href="apply for job.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+            <div class="company-item">
+                <img src="image/cybernetic.png" alt="CyberNetics">
+                <h3>CyberNetics</h3>
+                <p>Pioneering cybersecurity innovations.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>Expertise in network security</li>
+                    <li>Experience with ethical hacking</li>
+                    <li>Knowledge of SIEM tools</li>
+                </ul>
+                <a href="apply for job.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+            <div class="company-item">
+                <img src="image/cloud wave.png" alt="CloudWave">
+                <h3>CloudWave</h3>
+                <p>Cloud computing and infrastructure services.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>Proficiency in AWS and Azure</li>
+                    <li>Experience with Kubernetes</li>
+                    <li>DevOps skills</li>
+                </ul>
+                <a href="apply for job.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+            <div class="company-item">
+                <img src="image/datamind.png" alt="DataMinds">
+                <h3>DataMinds</h3>
+                <p>Big Data and AI-driven analytics.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>SQL and NoSQL experience</li>
+                    <li>Data visualization skills</li>
+                    <li>Knowledge of Hadoop</li>
+                </ul>
+                <a href="apply for job.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+            <div class="company-item">
+                <img src="image/softsolution.jpg" alt="SoftSolutions">
+                <h3>SoftSolutions</h3>
+                <p>Enterprise software development.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>Expertise in .NET and Java</li>
+                    <li>Agile experience</li>
+                    <li>Database design knowledge</li>
+                </ul>
+                <a href="apply for job.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+            <div class="company-item">
+                <img src="image/innov tech.jpg" alt="InnoTech">
+                <h3>InnoTech</h3>
+                <p>Innovative technology research and development.</p>
+                <h4>Skill Requirements:</h4>
+                <ul>
+                    <li>Proficiency in AI and IoT</li>
+                    <li>Embedded systems experience</li>
+                    <li>Problem-solving abilities</li>
+                </ul>
+                <a href="reg.html"><button class="apply-button">Apply Now</button></a>
+            </div>
+        </div>
+    </section>
+    <footer>Copyright © 2025 IT Companies</footer>
+    <script>
+      function loadCompPage() {
+    fetch('/comp.html') // Ensure this matches the actual file name
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('content').innerHTML = data;
+        })
+        .catch(error => console.error('Error fetching comp.html:', error));
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+ /* Apply full-page background image */
+ body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('/image/lp.jpg') no-repeat center center fixed; /* Add your college image path here */
+    background-size: cover; /* Ensure the image covers the entire page */
+  }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(120deg, #1a6fb4,#11d2b5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #444;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    width: 400px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+.container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #73dcfc;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #555;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #8e44ad;
+    box-shadow: 0 0 10px rgba(142, 68, 173, 0.1);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #7d3c98;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    background-color: #6c3483;
+    box-shadow: none;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+p {
+    font-size: 14px;
+    color: #777;
+}
+
+.form-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}

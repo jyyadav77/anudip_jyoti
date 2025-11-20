@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forgot Password - Skillsphere</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #fc25e6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+    background: rgba(255, 255, 255, 0.1);
+   
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    text-align: center;
+}
+
+        h1 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            font-weight: 300;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff7b00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff5722;
+        }
+
+        p {
+            font-size: 13px;
+            color: #ffdddd;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .switch {
+            color: #ffeb3b;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: underline;
+        }
+
+        .switch:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SKILLSPHERE</h1>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotPasswordForm">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" required />
+            <button type="submit">Send OTP</button>
+            <p id="message"></p>
+        </form>
+
+        <!-- OTP Verification Form -->
+        <form id="verifyOtpForm" class="hidden">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" required />
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" required />
+            <button type="submit">Reset Password</button>
+            <p id="otpMessage"></p>
+        </form>
+
+        <span class="switch hidden" id="backToEmail">Back to Email</span>
+    </div>
+
+    <script>
+        const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+        const verifyOtpForm = document.getElementById("verifyOtpForm");
+        const message = document.getElementById("message");
+        const otpMessage = document.getElementById("otpMessage");
+        const backToEmail = document.getElementById("backToEmail");
+
+        // **Send OTP to Email**
+        forgotPasswordForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+
+            try {
+                const response = await fetch("http://localhost:5000/forgot-password", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    message.style.color = "lightgreen";
+                    message.textContent = data.message;
+                    forgotPasswordForm.classList.add("hidden");
+                    verifyOtpForm.classList.remove("hidden");
+                    backToEmail.classList.remove("hidden");
+                } else {
+                    message.textContent = data.message;
+                }
+            } catch (error) {
+                message.textContent = "Error sending OTP. Try again.";
+            }
+        });
+
+        // **Verify OTP & Reset Password**
+        verifyOtpForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const otp = document.getElementById("otp").value;
+            const newPassword = document.getElementById("newPassword").value;
+
+            try {
+                const response = await fetch("http://localhost:5000/verify-otp", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, otp, newPassword }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    otpMessage.style.color = "lightgreen";
+                    otpMessage.textContent = data.message;
+                    setTimeout(() => {
+                        window.location.reload(); 
+                    }, 2000);
+                } else {
+                    otpMessage.textContent = data.message;
+                }
+            } catch (error) {
+                otpMessage.textContent = "Error verifying OTP. Try again.";
+            }
+        });
+
+        // **Switch Back to Email Form**
+        backToEmail.addEventListener("click", () => {
+            verifyOtpForm.classList.add("hidden");
+            forgotPasswordForm.classList.remove("hidden");
+            backToEmail.classList.add("hidden");
+        });
+    </script>
+
+</body>
+</html>

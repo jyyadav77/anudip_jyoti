@@ -1,0 +1,293 @@
+body{
+  margin:0;
+  padding:0
+  box-sizing border-box;
+
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(150deg, #1a6fb4,#11d2b5);
+  background: linear-gradient( #38965a,);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  background-color: #ffffff; /* White background for the form */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 400px;
+}
+
+
+h2 {
+  text-align: center;
+  color: #601aa7; /* Deep teal for the heading */
+  margin-bottom: 20px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #001210; /* Matching the heading color */
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #b2dfdb; /* Light teal border */
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #dc7aed; /* Deep teal on focus */
+  box-shadow: 0 0 5px rgba(red, green, blue, alpha,0.5);
+}
+
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color:  #12b368; /* Deep teal for the button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.register-btn:hover {
+  background-color: #9029f6; /* Darker teal on hover */
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #f498ee;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap');
+
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(150deg, #1a6fb4, #11d2b5);
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Form Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    width: 40%;
+    border-radius: 15px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    margin: 15px 0 5px 10%;
+    font-size: 16px;
+    color: #555;
+}
+
+input {
+    width: 80%;
+    padding: 12px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    display: block;
+    box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.05);
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border: 1px solid #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+button {
+    background: linear-gradient(150deg, #1a6fb4, #11d2b5);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: cubic-bezier(0.85, 0, 0.15, 1) 0.3s, transform 0.25s ease-in-out;
+
+
+button:hover {
+    background: linear-gradient(150deg, #135a8a, #0fa28f);
+    transform: translateY(-3px);
+}
+
+/* Certificate Styling */
+.certificate-container {
+    display: none;
+    margin-top: 20px;
+}
+
+.certificate {
+    background: #ffffff;
+    width: 80%;
+    margin: auto;
+    padding: 40px;
+    border: 10px solid #1a6fb4;
+    text-align: center;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
+}
+
+.certificate::before, .certificate::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('https://cdn-icons-png.flaticon.com/512/565/565547.png') no-repeat center;
+    background-size: contain;
+}
+
+.certificate::before {
+    top: 20px;
+    left: 20px;
+}
+
+.certificate::after {
+    top: 20px;
+    right: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.certificate-header {
+    color: #007bff;
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.cert-text {
+    font-size: 18px;
+    color: #555;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 36px;
+    color: #222;
+}
+
+h2, h3, h4 {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+}
+
+.certificate-footer {
+    margin-top: 30px;
+    font-size: 18px;
+    color: #555;
+}
+
+#downloadPDF {
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition:  0.3s ease, transform 0.2s ease;
+}
+
+#downloadPDF:hover {
+    background: #218838;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+    .certificate {
+        width: 95%;
+    }
+}
+}

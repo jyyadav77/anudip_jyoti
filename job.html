@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="job.CSS">
+    <style>
+        /* Aesthetic background and font styling */
+body {
+    background-color: #f0f4f8;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    margin: 50px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Header Styling */
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: white;
+  }
+  
+  thead {
+    background-color: #4a32e3;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Hover effect for table rows */
+  tbody tr:hover {
+    background-color: #e9e9e9;
+  }
+  
+  /* Adjust column widths */
+  th, td {
+    width: 25%;
+  }
+  
+  /* Make the table responsive */
+  @media screen and (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+  }
+    </style>
+    <title>Job Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Accepted Job Details</h1>
+        <div id="job-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Description</th>
+                        <th>Skills Required</th>
+                        <th>Pay Scale</th>
+                        <th>Submission</th>
+                    </tr>
+                </thead>
+                <tbody id="job-details-body">
+                    <!-- Job details will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to get stored jobs from localStorage
+        function getStoredJobs() {
+            return JSON.parse(localStorage.getItem('acceptedJobs')) || [];
+        }
+
+        // Retrieve stored job data
+        const jobs = getStoredJobs();
+
+        // Display each job detail in the table
+        const jobDetailsBody = document.getElementById('job-details-body');
+
+        if (jobs.length > 0) {
+            jobs.forEach((job) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${job.jb}</td>
+                    <td>${job.dec}</td>
+                    <td>${job.sr}</td>
+                    <td>${job.ps}</td>
+                     <td>
+          <button class="accept" onclick="acceptbutton('${job.jb}', '${job.dec}', '${job.sr}', '${job.ps}')">Accept</button>
+        </td>
+
+                `;
+                jobDetailsBody.appendChild(row);
+            });
+ } 
+ function acceptbutton(jb, dec, sr, ps) {
+    // Store the accepted job details if needed
+    localStorage.setItem('acceptedJob', JSON.stringify({ jb, dec, sr, ps }));
+    alert('Job Accepted Sucessfully')
+    // Redirect to AC.html
+    window.location.href = 'AC.html';
+}
+    </script>
+</body>
+</html>

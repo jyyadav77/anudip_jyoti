@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Graphics Design Quiz</title>
+    <style>
+       body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.quiz-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    max-width: 600px;
+    width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+.quiz-container:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+}
+
+.question {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.options button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+}
+
+.options button:hover {
+    background: linear-gradient(135deg, #ff5177, #ff7eb3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 118, 145, 0.4);
+}
+
+#result {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #00ff99;
+}
+
+#submit-btn {
+    display: none;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+#submit-btn:hover {
+    background: linear-gradient(135deg, #218838, #17a673);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quiz-container {
+        width: 95%;
+        padding: 30px;
+    }
+    
+    .options button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    #timer {
+        font-size: 18px;
+    }
+}
+;
+    
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Advanced Graphics Design Quiz</h2>
+        <form id="participant-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <button type="submit">Start Quiz</button>
+        </form>
+        <div id="quiz-content" style="display: none;">
+            <div id="timer">Time Remaining: 05:00</div>
+            <p class="question" id="question"></p>
+            <div class="options" id="options"></div>
+            <p id="result"></p>
+            <button id="submit-btn">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "What is anti-aliasing used for?", options: ["Smoothing edges", "Increasing resolution", "Reducing colors", "Improving compression"], answer: "Smoothing edges" },
+            { question: "Which color model is primarily used in digital screens?", options: ["RGB", "CMYK", "HSV", "Pantone"], answer: "RGB" },
+            { question: "What does DPI stand for?", options: ["Dots Per Inch", "Depth Pixel Index", "Digital Processing Interface", "Dynamic Pixel Integration"], answer: "Dots Per Inch" },
+            { question: "Which software is commonly used for vector graphics?", options: ["Adobe Illustrator", "Adobe Photoshop", "GIMP", "Blender"], answer: "Adobe Illustrator" },
+            { question: "What is the purpose of a clipping mask?", options: ["To hide parts of an image", "To enhance contrast", "To apply filters", "To change brightness"], answer: "To hide parts of an image" },
+            { question: "Which file format is best for lossless image compression?", options: ["PNG", "JPEG", "GIF", "BMP"], answer: "PNG" },
+            { question: "What is the main function of a bezier curve?", options: ["To create smooth curves", "To add shadows", "To blend colors", "To crop images"], answer: "To create smooth curves" },
+            { question: "Which type of graphic is resolution-independent?", options: ["Vector graphics", "Raster images", "Bitmap graphics", "Pixel art"], answer: "Vector graphics" },
+            { question: "What does the term 'kerning' refer to?", options: ["Adjusting space between letters", "Resizing images", "Applying color corrections", "Adding gradients"], answer: "Adjusting space between letters" },
+            { question: "Which of the following is an open-source graphic design tool?", options: ["Inkscape", "CorelDRAW", "Affinity Designer", "Sketch"], answer: "Inkscape" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 300;
+        let timerInterval;
+
+        // Collect participant details
+        document.getElementById("participant-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            // Store details in localStorage
+            localStorage.setItem("participantName", name);
+            localStorage.setItem("participantEmail", email);
+
+            // Hide form and show quiz
+            document.getElementById("participant-form").style.display = "none";
+            document.getElementById("quiz-content").style.display = "block";
+
+            // Start quiz
+            loadQuestion();
+            startTimer();
+        });
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endQuiz("Time's up! Your score: ");
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById("timer").innerText = `Time Remaining: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }
+
+        function endQuiz(message) {
+            clearInterval(timerInterval);
+            const resultMessage = score >= 8 ? "Congratulations! You've earned a certificate!" : "Nice try! Better luck next time.";
+            document.getElementById("result").innerText = `${message}${score}/${quizData.length}\n${resultMessage}`;
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("question").innerText = "";
+            document.getElementById("submit-btn").style.display = "block";
+
+            // Store quiz score in localStorage
+            localStorage.setItem("quizScore", `${score}/${quizData.length}`);
+
+            // Redirect to certificate page if score is 8 or higher
+            if (score >= 8) {
+                setTimeout(() => {
+                    window.location.href = `certificate.html?email=${localStorage.getItem("participantEmail")}`;
+                }, 3000);
+            }
+        }
+
+        function loadQuestion() {
+            if (currentQuestion < quizData.length) {
+                document.getElementById("question").innerText = quizData[currentQuestion].question;
+                const optionsDiv = document.getElementById("options");
+                optionsDiv.innerHTML = "";
+                quizData[currentQuestion].options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(option);
+                    optionsDiv.appendChild(button);
+                });
+            } else {
+                endQuiz("Quiz Over! Your score: ");
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === quizData[currentQuestion].answer) score++;
+            currentQuestion++;
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>

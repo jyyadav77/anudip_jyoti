@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Data Science Quiz</title>
+    <style>
+        /* Apply full-page background image */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('/image/AI.webp') no-repeat center center fixed; /* Add your college image path here */
+  background-size: cover; /* Ensure the image covers the entire page */
+}
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #0056b3;
+        }
+        #result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #timer {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+        #submit-btn {
+            display: none; /* Hidden by default */
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #submit-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Advanced Data Science Quiz</h2>
+        <div id="timer">Time Remaining: 05:00</div>
+        <p class="question" id="question"></p>
+        <div class="options" id="options"></div>
+        <p id="result"></p>
+        <button id="submit-btn">Submit</button>
+    </div>
+    
+    <script>
+        const quizData = [
+            {
+                question: "What is the primary purpose of Principal Component Analysis (PCA) in machine learning?",
+                options: ["To reduce dimensionality", "To classify data", "To cluster data", "To visualize data"],
+                answer: "To reduce dimensionality"
+            },
+            {
+                question: "Which of the following is a key assumption of linear regression?",
+                options: ["Multicollinearity is present", "Residuals are normally distributed", "Data is categorical", "Variance is non-constant"],
+                answer: "Residuals are normally distributed"
+            },
+            {
+                question: "What is the main difference between bagging and boosting in ensemble learning?",
+                options: ["Bagging reduces bias, while boosting reduces variance", "Bagging trains models in parallel, while boosting trains sequentially", "Bagging uses weighted samples, while boosting uses equal weights", "Bagging is used for classification, while boosting is used for regression"],
+                answer: "Bagging trains models in parallel, while boosting trains sequentially"
+            },
+            {
+                question: "What is the role of the learning rate in gradient descent?",
+                options: ["It controls the number of iterations", "It determines the step size for weight updates", "It defines the number of hidden layers", "It sets the regularization strength"],
+                answer: "It determines the step size for weight updates"
+            },
+            {
+                question: "Which of the following is a disadvantage of using k-means clustering?",
+                options: ["It requires labeled data", "It is sensitive to the initial placement of centroids", "It cannot handle high-dimensional data", "It is computationally expensive for small datasets"],
+                answer: "It is sensitive to the initial placement of centroids"
+            },
+            {
+                question: "What is the purpose of the activation function in a neural network?",
+                options: ["To reduce overfitting", "To introduce non-linearity", "To normalize input data", "To optimize the learning rate"],
+                answer: "To introduce non-linearity"
+            },
+            {
+                question: "Which evaluation metric is most appropriate for imbalanced classification problems?",
+                options: ["Accuracy", "F1 Score", "Mean Squared Error", "R-squared"],
+                answer: "F1 Score"
+            },
+            {
+                question: "What is the main goal of regularization techniques like L1 and L2?",
+                options: ["To increase model complexity", "To reduce overfitting", "To speed up training", "To handle missing data"],
+                answer: "To reduce overfitting"
+            },
+            {
+                question: "What is the primary use of the ROC curve in classification models?",
+                options: ["To measure model accuracy", "To visualize the trade-off between true positive rate and false positive rate", "To determine feature importance", "To calculate the precision-recall trade-off"],
+                answer: "To visualize the trade-off between true positive rate and false positive rate"
+            },
+            {
+                question: "Which of the following is a key difference between supervised and unsupervised learning?",
+                options: ["Supervised learning requires labeled data, while unsupervised learning does not", "Supervised learning is used for clustering, while unsupervised learning is used for classification", "Supervised learning is faster than unsupervised learning", "Supervised learning cannot handle high-dimensional data"],
+                answer: "Supervised learning requires labeled data, while unsupervised learning does not"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 300; // 5 minutes in seconds
+        let timerInterval;
+
+        // Function to start the timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endQuiz("Time's up! Your score: ");
+                }
+            }, 1000);
+        }
+
+        // Function to update the timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById("timer").innerText = `Time Remaining: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }
+
+        // Function to end the quiz
+        function endQuiz(message) {
+            clearInterval(timerInterval); // Stop the timer
+            document.getElementById("result").innerText = `${message}${score}/${quizData.length}`;
+            document.getElementById("options").innerHTML = "";
+            document.getElementById("question").innerText = "";
+
+            // Show the submit button
+            document.getElementById("submit-btn").style.display = "block";
+        }
+
+        // Function to handle submit button click
+        document.getElementById("submit-btn").addEventListener("click", function () {
+            // Display a message
+            document.getElementById("result").innerText = "You Response Successfully. Redirecting to login page...";
+
+            // Redirect to login.html after 3 seconds
+            setTimeout(() => {
+                window.location.href = "login.html"; // Relative path to login.html
+            }, 3000); // 3 seconds delay
+        });
+
+        // Prevent navigating away from the page
+        
+        // Prevent opening new tabs or windows
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent right-click context menu
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        // Detect if the user switches tabs or minimizes the window
+        document.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === "hidden") {
+                endQuiz("Session expired! You switched tabs or minimized the window. Your score: ");
+            }
+        });
+
+        function loadQuestion() {
+            if (currentQuestion < quizData.length) {
+                document.getElementById("question").innerText = quizData[currentQuestion].question;
+                const optionsDiv = document.getElementById("options");
+                optionsDiv.innerHTML = "";
+                quizData[currentQuestion].options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(option);
+                    optionsDiv.appendChild(button);
+                });
+            } else {
+                endQuiz("Quiz Over! Your score: ");
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === quizData[currentQuestion].answer) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        // Start the quiz and timer
+        loadQuestion();
+        startTimer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificate of Achievement</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      /* A professional background using a subtle gradient */
+      background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+ /* Apply full-page background image */
+ body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("/image/lp.jpg") no-repeat center center fixed; /* Add your college image path here */
+  background-size: cover; /* Ensure the image covers the entire page */
+}
+
+
+
+
+    /* Certificate container */
+    .certificate-container {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      border: 10px solid #2c3e50;
+      border-radius: 15px;
+      padding: 40px 60px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1s ease-in-out;
+    }
+    /* Print button */
+    .print-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .print-btn:hover {
+      background: #2980b9;
+    }
+    /* Certificate header */
+    .certificate-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .certificate-logo {
+      width: 100px;
+      height: auto;
+      margin: 0 auto;
+    }
+    .certificate-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+    /* Certificate body */
+    .certificate-body {
+      text-align: center;
+      margin: 30px 0;
+      line-height: 1.6;
+      font-size: 20px;
+      color: #333;
+    }
+    .certificate-body h2 {
+      font-size: 28px;
+      margin: 20px 0;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+    /* Certificate footer */
+    .certificate-footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+    .signature {
+      display: block;
+      width: 200px;
+      margin: 0 auto 10px auto;
+    }
+    .signature-text {
+      font-style: italic;
+    }
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Print Button -->
+  <button class="print-btn" onclick="window.print()">Print Certificate</button>
+  
+  <!-- Certificate Container -->
+  <div class="certificate-container">
+    <!-- Header with Logo and Title -->
+    <div class="certificate-header">
+      <!-- Replace with your actual logo file -->
+      <img src="/image/certificate.jpg" alt="Company Logo" class="certificate-logo">
+      <div class="certificate-title">Certificate of Achievement</div>
+    </div>
+    <!-- Certificate Body with Dynamic Text -->
+    <div class="certificate-body">
+      <p>This is to certify that</p>
+      <h2 id="recipientName">[Recipient Name]</h2>
+      <p>
+        has successfully completed the <strong id="courseName">[Course/Program Name]</strong> and demonstrated exceptional skills and dedication.
+      </p>
+      <p style="margin-top: 20px;">
+        Awarded on <strong id="awardDate">[Date]</strong>
+      </p>
+    </div>
+    <!-- Certificate Footer with Professional Signature -->
+    <div class="certificate-footer">
+      <!-- Replace "signature.png" with your actual signature image -->
+      <img src="/image/signature.png" alt="Authorized Signature" class="signature">
+      <div class="signature-text">Authorized Signature</div>
+    </div>
+  </div>
+
+  <!-- JavaScript to Dynamically Populate the Certificate -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Dynamic certificate data (replace with dynamic source as needed)
+      const recipientName = "John Doe";
+      const courseName = "Full Stack Web Development";
+      const awardDate = new Date().toLocaleDateString();
+
+      // Populate the certificate fields with dynamic data
+      document.getElementById("recipientName").textContent = recipientName;
+      document.getElementById("courseName").textContent = courseName;
+      document.getElementById("awardDate").textContent = awardDate;
+    });
+  </script>
+</body>
+</html>

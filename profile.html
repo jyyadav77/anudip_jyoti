@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <span><strong>Skillsphere</strong> </span>
+    </div>
+    <ul class="nav-right">
+      <li><a href="HP.html">Home</a></li>
+      <li><a href="comp.html">Jobs For Students</a></li>
+      <li><a href="instit.html">Apply for course </a></li>
+      <li class="logout"><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>My Profile</h2>
+    
+    <div class="profile-section">
+      <div class="profile-photo">
+        <label for="uploadImage">
+          <img id="profileImage" src="/image/pplogo" alt="Profile Photo">
+          <span class="upload-text"></span>
+        </label>
+        <input type="file" id="uploadImage" name="profileImage" onchange="previewImage(event)">
+      </div>
+
+      <div class="profile-details">
+        <form id="profileForm" action="/saveProfile" method="post" enctype="multipart/form-data">
+          <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="input-group">
+            <label for="cgpa">Degree:</label>
+            <input type="number" step="0.01" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
+          </div>
+
+          <div class="input-group">
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" placeholder="Enter your skills" required>
+          </div>
+
+          <div class="input-group">
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+          </div>
+
+          <button type="submit" id="submit" class="profile-button">Save Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to preview the selected image
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const output = document.getElementById("profileImage");
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Handle form submission
+    document.getElementById("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      try {
+        const response = await fetch("/saveProfile", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert("Profile saved successfully!");
+        } else {
+          alert("Error: " + result.message);
+        }
+      } catch (error) {
+        console.error("Error saving profile:", error);
+        alert("An error occurred.");
+      }
+    });
+  </script>
+</body>
+</html>

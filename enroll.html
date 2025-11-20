@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Now</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #11cbbf,  #38965a);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .enroll-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .enroll-container:hover {
+            transform: scale(1.02);
+        }
+        .enroll-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .enroll-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .enroll-container input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+        }
+        .enroll-container button {
+            padding: 12px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .enroll-container button:hover {
+            background: #1a5bbd;
+            transform: scale(1.05);
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 16px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="enroll-container">
+        <h2>Enroll Now</h2>
+        <form id="enroll-form">
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="date" id="date" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+       document.getElementById("enroll-form").addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Get form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const date = document.getElementById("date").value;
+
+            // Create an object to send to the server
+            const data = {
+                name: name,
+                email: email,
+                date: date
+            };
+
+            try {
+                // Send a POST request to the server
+                const response = await fetch("http://localhost:5000/enroll", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Display success message
+                    document.getElementById("message").innerText = "Enrollment successful! Redirecting...";
+
+                    // Redirect to DS.html after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = "GD.html";
+                    }, 2000);
+                } else {
+                    // Display error message
+                    document.getElementById("message").innerText = result.message || "Enrollment failed. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("message").innerText = "An error occurred. Please try again.";
+            }
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrations and Job Applications</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Seminar Registrations</h1>
+  <table id="registration-table">
+    <thead>
+      <tr>
+        <th>Phone</th>
+        <th>College</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <h1>Job Applications</h1>
+  <table id="application-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Experience</th>
+        <th>Resume</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <script>
+    // Fetch and display seminar registrations
+    async function fetchRegistrations() {
+      try {
+        const response = await fetch("http://localhost:5000/register");
+        const data = await response.json();
+
+        if (data.success) {
+          const tableBody = document.querySelector("#registration-table tbody");
+          tableBody.innerHTML = ""; // Clear existing rows
+
+          data.data.forEach(registration => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${registration.phone}</td>
+              <td>${registration.college}</td>
+              <td>${registration.name}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } else {
+          console.error("Error fetching registrations:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching registrations:", error);
+      }
+    }
+
+    // Fetch and display job applications
+    async function fetchApplications() {
+      try {
+        const response = await fetch("http://localhost:5000/apply");
+        const data = await response.json();
+
+        if (data.success) {
+          const tableBody = document.querySelector("#application-table tbody");
+          tableBody.innerHTML = ""; // Clear existing rows
+
+          data.data.forEach(application => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${application.name}</td>
+              <td>${application.email}</td>
+              <td>${application.phone}</td>
+              <td>${application.experience}</td>
+              <td><a href="${application.resume}" target="_blank">View Resume</a></td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } else {
+          console.error("Error fetching applications:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching applications:", error);
+      }
+    }
+
+    // Fetch data when the page loads
+    fetchRegistrations();
+    fetchApplications();
+  </script>
+</body>
+</html>

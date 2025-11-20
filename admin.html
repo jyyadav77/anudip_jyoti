@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex;
+        height: 100vh;
+        flex-direction: row; /* Ensures sidebar and content are horizontally aligned */
+    }
+    .sidebar {
+        width: 250px;
+        background: #2c3e50;
+        color: #fff;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar h2 {
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+    .sidebar button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        background: #34495e;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    .sidebar button:hover {
+        background: #1abc9c;
+    }
+    .sub-module {
+        display: none;
+        margin-top: 10px;
+        padding-left: 20px;
+        background-color: #34495e;
+        border-radius: 5px;
+    }
+    .sub-module button {
+        background: #16a085;
+        margin: 5px 0;
+    }
+    .content {
+        flex-grow: 1;
+        padding: 30px;
+        background: #ecf0f1;
+        overflow-y: auto;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 2.5em;
+    }
+    .panel {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        display: none;
+    }
+    .btn {
+        background: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    .btn:hover {
+        background: #218838;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+    .table th {
+        background: #2c3e50;
+        color: #fff;
+    }
+    .job-item, .course-item {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+        text-align: center;
+        width: 220px;
+        margin-right: 15px;
+        vertical-align: top;
+        display: inline-block;
+    }
+    .job-item img, .course-item img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .job-item button, .course-item button {
+        background: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    .job-item button:hover, .course-item button:hover {
+        background: #2980b9;
+    }
+    .requirements {
+        text-align: left;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #555;
+    }
+    .requirements ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .requirements ul li {
+        margin-bottom: 5px;
+    }
+    .general-requirements {
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+    .general-requirements h3 {
+        color: #333;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <button onclick="showPanel('reg')">Number of Registrations</button>
+            <div class="sub-module" id="regSubModule">
+                <button>Pending Registrations</button>
+                <button>Approved Registrations</button>
+            </div>
+            <button onclick="showPanel('jobs')">Jobs by Companies</button>
+            <div class="sub-module" id="jobsSubModule">
+                <button>Posted Jobs</button>
+                <button>Job Applications</button>
+            </div>
+            <button onclick="showPanel('course')">Course by Institution</button>
+            <div class="sub-module" id="courseSubModule">
+                <button>View Courses</button>
+                <button>Approve Courses</button>
+            </div>
+            <button onclick="window.location.href='Contus.html'">Queries</button>
+        </div>
+        <script>
+            function loadPage(page) {
+                fetch(page)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('contacts').innerHTML = html;
+                })
+                .catch(err => console.error('Error loading the page:', err));
+            }
+            </script>
+            
+
+            <div id="reg" class="panel" style="display: none;">
+                <h2>Number of Registrations</h2>
+            
+              
+                <!-- Add a button to redirect to data.html -->
+                <button onclick="window.location.href='data.html'" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                  View Full Data
+                </button>
+              </div>
+
+        <div id="jobs" class="panel" style="display: none;">
+            <h2>Number of Jobs</h2>
+            <div class="job-item">
+                <img src="image/AI.webp" alt="Artificial Intelligence">
+                <h3>Artificial Intelligence</h3>
+                <p>Explore AI job opportunities.</p>
+                <div class="requirements">
+                    <h4> Requirements:</h4>
+                    <ul>
+                        <li>Experience with machine learning models</li>
+                        <li>Strong programming skills (Python, C++, etc.)</li>
+                        <li>Understanding of AI frameworks</li>
+                    </ul>
+                </div>
+                <button>Update</button>
+            </div>
+            <div class="job-item">
+                <img src="image/web dev.jpg" alt="Web Development">
+                <h3>Web Development</h3>
+                <p>Front-end and back-end job listings.</p>
+                <div class="requirements">
+                    <h4> Requirements:</h4>
+                    <ul>
+                        <li>Proficiency in HTML, CSS, JavaScript</li>
+                        <li>Experience with frameworks like React, Angular</li>
+                        <li>Knowledge of back-end technologies (Node.js, Python, etc.)</li>
+                    </ul>
+                </div>
+                <button>Update</button>
+            </div>
+            <div class="job-item">
+                <img src="image/ds.jpg" alt="Data Science">
+                <h3>Data Science</h3>
+                <p>Analyze data for business insights.</p>
+                <div class="requirements">
+                    <h4> Requirements:</h4>
+                    <ul>
+                        <li>Proficiency in Python, R</li>
+                        <li>Experience with data visualization tools</li>
+                        <li>Strong understanding of statistics and machine learning</li>
+                    </ul>
+                </div>
+                <button>Update</button>
+            </div>
+            <div class="job-item">
+                <img src="image/cc.jpg" alt="Cloud Computing">
+                <h3>Cloud Computing</h3>
+                <p>Opportunities in cloud technology.</p>
+                <div class="requirements">
+                    <h4> Requirements:</h4>
+                    <ul>
+                        <li>Experience with cloud platforms (AWS, Azure, GCP)</li>
+                        <li>Understanding of cloud security and architecture</li>
+                        <li>Experience in deploying and managing cloud applications</li>
+                    </ul>
+                </div>
+                <button>Update</button>
+            </div>
+            <!-- Add other jobs here following the same structure -->
+
+            <!-- General Requirements for All Jobs -->
+            <div class="general-requirements">
+                <h3>General Basic Requirements to Apply for Any Job</h3>
+                <ul>
+                    <li>Minimum 2 years of relevant experience in the field</li>
+                    <li>Strong problem-solving and analytical skills</li>
+                    <li>Good communication skills, both written and verbal</li>
+                    <li>Willingness to work in a team environment</li>
+                    <li>Ability to learn new skills and technologies</li>
+                    <li>A degree or relevant certification in the field</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="course" class="panel" style="display: none;">
+            <h2>Courses by Institutions</h2>
+            <div class="course-item">
+                <img src="image/AI.webp" alt="Artificial Intelligence Course">
+                <h3>Artificial Intelligence</h3>
+                <p>Learn the basics of AI and machine learning.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/web dev.jpg" alt="Web Development Course">
+                <h3>Web Development</h3>
+                <p>Build modern websites with front-end and back-end technologies.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/data science.jpg" alt="Data Science Course">
+                <h3>Data Science</h3>
+                <p>Master the art of analyzing data and making predictions.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/cloud com.jpg" alt="Cloud Computing Course">
+                <h3>Cloud Computing</h3>
+                <p>Get hands-on experience with cloud technologies.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/ux.jpg" alt="UI/UX Design Course">
+                <h3>UI/UX Design</h3>
+                <p>Create exceptional user experiences with modern design techniques.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/blockchain.png" alt="Blockchain Course">
+                <h3>Blockchain Technology</h3>
+                <p>Understand blockchain and build decentralized applications.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/cyber.jpg" alt="Cybersecurity Course">
+                <h3>Cybersecurity</h3>
+                <p>Learn how to secure networks and systems from cyber attacks.</p>
+                <button>Update</button>
+            </div>
+            <div class="course-item">
+                <img src="image/marketing.jpg" alt="Digital Marketing Course">
+                <h3>Digital Marketing</h3>
+                <p>Develop skills to market products and services online.</p>
+                <button>Update</button>
+            </div>
+        </div>
+
+            <!-- Add other courses here -->
+        </div>
+
+        <div id="activities" class="panel" style="display: none;">
+            <h2>User Activities</h2>
+            <p id="activityLog">No recent activity.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            document.getElementById(panelId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

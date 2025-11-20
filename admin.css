@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('https://source.unsplash.com/1600x900/?technology,office') no-repeat center center/cover;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar h1 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 25%;
+    background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100vh;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.sidebar button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Content */
+.content {
+    margin-left: 27%;
+    padding: 30px;
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* Tab Content */
+.tabcontent {
+    display: none;
+    animation: fadeEffect 0.5s ease-in-out;
+}
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.tabcontent h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #f39c12;
+}
+
+/* Form Styling */
+.tabcontent form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+input::placeholder {
+    color: #ddd;
+}
+
+/* Buttons */
+.submit-btn, .logout-btn {
+    padding: 12px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn {
+    background-color: #27ae60;
+}
+
+.submit-btn:hover {
+    background-color: #2ecc71;
+}
+
+.logout-btn {
+    background-color: #e74c3c;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 12px;
+    text-align: center;
+    color: white;
+}
+
+th {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* List Styling */
+#departmentList, #batchList, #placementStats, #companiesList, #seminarList {
+    margin-top: 20px;
+}
+
+#departments, #batches, #placementStats, #companiesList, #seminarList {
+    list-style: none;
+    padding: 0;
+}
+
+#departments li, #batches li, #placementStats li, #companiesList li, #seminarList li {
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+#departments li:hover, #batches li:hover, #placementStats li:hover, #companiesList li:hover, #seminarList li:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Bold Text */
+.bold {
+    font-weight: bold;
+    color: #f39c12;
+}

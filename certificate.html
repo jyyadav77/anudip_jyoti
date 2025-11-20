@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Completion</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+        }
+        .certificate-container {
+            background: white;
+            color: black;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            border: 8px solid gold;
+        }
+        h1 {
+            font-size: 40px;
+            color: #1e3c72;
+        }
+        p {
+            font-size: 20px;
+            margin: 15px 0;
+        }
+        .bold-text {
+            font-weight: bold;
+            font-size: 22px;
+        }
+        .download-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: gold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 0 50px;
+        }
+        .signature div {
+            text-align: center;
+        }
+        .certificate-date {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="certificate" class="certificate-container">
+        <h1>Certificate of Completion</h1>
+        <p>This certificate is awarded to:</p>
+        <p class="bold-text" id="participant-name">[Name]</p>
+        <p>For successfully completing the course:</p>
+        <p class="bold-text" id="course-name">[Course Name]</p>
+        <p>with an outstanding performance and dedication.</p>
+        <p class="certificate-date" id="current-date"></p>
+        <div class="signature">
+            <div>
+                <p>Khalil Mujawar</p>
+                <p>Instructor</p>
+            </div>
+            <div>
+                <p>Nawal Khan</p>
+                <p>Director</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="download-btn" onclick="generatePDF()">Download Certificate</button>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        async function fetchParticipantDetails(email) {
+            try {
+                const response = await fetch(`/getProfile?email=${email}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch participant details");
+                }
+                const data = await response.json();
+                return data.student;
+            } catch (error) {
+                console.error("Error fetching participant details:", error);
+                return null;
+            }
+        }
+
+
+
+        async function displayCertificate() {
+            const participant = await fetchParticipantDetails(email);
+            if (participant) {
+                document.getElementById("participant-name").innerText = participant.name;
+                document.getElementById("course-name").innerText = localStorage.getItem("courseName") || "[Course Name]";
+                document.getElementById("current-date").innerText = "Date: " + new Date().toLocaleDateString();
+            } else {
+                document.getElementById("participant-name").innerText = "Participant details not found.";
+            }
+        }
+
+        displayCertificate();
+        async function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("landscape");
+
+    const element = document.getElementById("certificate");
+
+    // Assuming you're using html2canvas to capture an element
+    html2canvas(element, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, "PNG", 20, 20, 250, 150);
+        pdf.save("Certificate.pdf");
+
+        // Send the base64 image data to the server
+        sendEmail(imgData);
+    });
+}
+
+// Function to send base64 data to the server
+function sendEmail(imgData) {
+    fetch('/uploadCertificate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pdfData: imgData }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('PDF uploaded:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+        
+    </script>
+</body>
+</html>
